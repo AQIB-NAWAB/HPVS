@@ -20,8 +20,8 @@ const Navbar = () => {
   return (
     <>
  <nav
-        className={`fixed flex flex-row justify-between items-center py-3 px-10 text-white ${
-          scrolling ? "bg-white text-black" : "bg-transparent"
+        className={`fixed flex flex-row justify-between items-center py-3 px-10  ${
+          scrolling ? "bg-white text-black" : "bg-transparent text-white"
         }`}
       >
   <div className="logo ">
