@@ -24,9 +24,9 @@ const Navbar = () => {
           scrolling ? "bg-white text-black shadow-md" : "bg-transparent text-white"
         }`}
       >
-  <div className="logo ">
+  <Link to={"/"} className="logo ">
     HPVS
-  </div>
+  </Link>
   <div className="links ">
     <ul className='flex flex-row gap-8  '>
       <li>

@@ -2,7 +2,7 @@
 
 .bg_overlay1{
     background-image: url("https://ourierge.com/assets/images/about/parallax-111.jpg");
-    height: 67vh;
+    height: 74vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -11,6 +11,7 @@
     color: white;
     background-repeat: no-repeat;
     background-size: cover ;
+    background-position: center;
     position: relative;
     
 }
@@ -37,3 +38,54 @@
     letter-spacing: 1px;
     margin: 10px 0px;
 }
+.shipping_page_content{
+    width: 70%;
+    margin: 0px auto;
+    padding: 70px 0px;
+}
+.shipping_page_content h1{
+    font-size: 26px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    margin: 20px 0px;
+}
+.shipping_page_content p{
+    font-size: 14px;
+    color: rgb(102, 102, 102);
+    font-weight: 100;
+
+}
+.shipping_page_content ul li{
+    list-style-type: disc;
+    color: rgb(102, 102, 102);
+    font-size: 14px;
+    
+}
+.shipping_page_content ul{
+    margin-top: 20px;
+}
+.offers{
+    gap: 40px;
+    display: flex;
+}
+.offers .offer{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Poppins';
+}
+.offers .offer .icon{
+    font-size: 25px;
+}
+.offers .offer p{
+    font-size: 14px;
+}
+
+@media screen and (max-width:786px) {
+    .offers{
+        flex-direction: column;
+    }
+   .offers .offer{
+        gap: 20px;
+    }
+ }

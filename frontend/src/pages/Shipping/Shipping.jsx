@@ -43,14 +43,17 @@ const Shipping = () => {
     <li>Deferred Service</li>
     <li>Both Sea and Air Combinations</li>
 </ul>
-<div className="track_package">
-    <h2>Ready to track your package?</h2>
+<div className="track_package flex flex-col gap-5 py-6  text-center my-28">
+    <h2 className="text-3xl">Ready to track your package?</h2>
     <p>Our easy to use tracking system helps you track your pacakges across all devices in the comfort of your home.</p>
-    <button>TRACK NOW</button>
+    <button className="text-md bg-blue-700 w-fit mx-auto py-3 px-4 text-white rounded-lg">TRACK NOW</button>
 </div>
-<div className="offers">
+<div className="offers flex ">
     <div className="offer">
+    <div className="icon">
+
 <FaGift className='text-4xl'/>
+    </div>
 <div className="details">
     <span>
     Discount on orders $200+
@@ -64,7 +67,10 @@ const Shipping = () => {
 
 
     <div className="offer">
+    <div className="icon">
+
 <FaPlane className='text-4xl'/>
+    </div>
 <div className="details">
     <span>
    
@@ -80,7 +86,10 @@ Worldwide delivery
 
 
     <div className="offer">
+    <div className="icon">
+
 <IoIosTimer className='text-4xl'/>
+    </div>
 <div className="details">
     <span>
    

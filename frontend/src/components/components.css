@@ -20,7 +20,7 @@ body {
 /* Your existing styles for the navigation */
 
 nav {
-  z-index: 999;
+  z-index: 9999;
   width: 100%;
 }
 
@@ -126,3 +126,16 @@ nav .trackNowBtn:hover {
 }
 
 
+@media screen and (max-width:786px) {
+ .hero_title{
+      font-size: 50px;
+ }  
+ .hero_subtitle{
+     font-size: 36px;
+     width: 100%;
+ }
+  .hero_content P{
+      font-size: 15px;
+      width: 100%;
+  }
+}

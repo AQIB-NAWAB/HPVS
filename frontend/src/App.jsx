@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Services from './pages/Services/Services'
 import Track from './pages/Track/Track'
 import Shipping from './pages/Shipping/Shipping'
+import Storage from './pages/Storage/Storage'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
   <Route path='/services' element={<Services />} />
   <Route path='/track' element={<Track />} />
   <Route path='/shipping' element={<Shipping />} />
+  <Route path='/storage' element={<Storage/>}/>
 </Routes>
     </>
   )
