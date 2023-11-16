@@ -21,7 +21,7 @@ const Navbar = () => {
     <>
  <nav
         className={`fixed flex flex-row justify-between items-center py-3 px-10  ${
-          scrolling ? "bg-white text-black" : "bg-transparent text-white"
+          scrolling ? "bg-white text-black shadow-md" : "bg-transparent text-white"
         }`}
       >
   <div className="logo ">
@@ -55,7 +55,7 @@ const Navbar = () => {
       
     </ul>
   </div>
-  <button className="trackNowBtn shadow-xl">
+  <button className="trackNowBtn ">
     Track Now
   </button>
 </nav>
