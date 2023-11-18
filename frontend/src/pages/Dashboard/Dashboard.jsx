@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Chart from "react-apexcharts";
 import Table from "../../components/Table";
 import { MdOutlinePending } from "react-icons/md";
 import { MdOutlineAutoGraph } from "react-icons/md";
+import { useAdminContext } from "../../context/adminContextProvider";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
+  const {setAdmin,admin,getPendingOrders,pendingOrders,getProcessingOrders,processingOrders,getAllOrders,allOrders,deliveredOrders,getDeliveredOrders,chartData,getChartData,addOrder}=useAdminContext()
+  const[search,setSearch]=useState({
+    order_id :'',
+    tracking_id :'',
+    user_email:''
+  })
+  const navigate=useNavigate()
   const [state, setState] = useState({
     user_email: "",
     order_id: "",
-    order_date: "",
     order_status: "",
     order_total: "",
-    order_shipping_address: "",
-    order_billing_address: "",
     tracking_id: "",
     order_shipped_from: "",
     order_shipped_to: "",
-    order_shipping_date: "",
+    order_shipped_date: "",
     order_delivery_date: "",
     shipping_service: "",
   });
@@ -30,14 +37,14 @@ const Dashboard = () => {
   };
   const submit = (e) => {
     e.preventDefault();
-    console.log(state);
+    addOrder(state)
   };
 
   const data = {
     series: [
       {
         name: "Orders",
-        data: [1, 10, 15, 5, 30, 50, 34, 56, 23, 67, 23, 45],
+        data: chartData?.data,
       },
     ],
     options: {
@@ -112,21 +119,48 @@ const Dashboard = () => {
       ],
     },
   };
+
+  useEffect(() => {
+const isUserExist=localStorage.getItem('admin')
+if(isUserExist){
+  setAdmin(true)
+
+}else{
+  setAdmin(false)
+navigate("/login")
+}
+  }, [admin,setAdmin,navigate])
+const handleLogout=(e)=>{
+  e.preventDefault()
+  setAdmin(false)
+  localStorage.removeItem('admin')
+  navigate("/login")
+}
+useEffect(() => {
+getPendingOrders();
+getProcessingOrders()
+getDeliveredOrders();
+getAllOrders();
+getChartData()
+},[])
+
+
+
   return (
     <div className="bg-[#161d31] w-[100%] h-[100%]">
       <div className="flex flex-col gap-6">
-        <div className="flex justify-between text-white mt-20 mx-[7.9%] rounded-md bg-[#283046] py-7 px-6 items-center border-b-4 border-[#d0d2d6] md:mb-10">
+        <div className="mt-36 flex justify-between text-white mt-20 mx-[7.9%] rounded-md bg-[#283046] py-7 px-6 items-center border-b-8  border-[#41437D] md:mb-10">
           <p className="border border-white pt-2 pb-2 pl-3 pr-3 font-bold rounded-sm tracking-[5px] text-[20px]">
             HPVS
           </p>
           <p className="text-[25px]">Dashboard</p>
-          <p className="text-[20px]">Admin</p>
+          <button className="bg-white  text-black px-4 py-2 rounded-md" onClick={(e)=>handleLogout(e)}>Logout</button>
         </div>
         {/* Orders count bar */}
         <div className="w-[88%] flex flex-col p-3 ml-6 md:ml-[6%] md:p-0 gap-4 md:gap-0 md:flex-row justify-around">
           <div className="flex justify-between items-center pt-6 pb-6 pl-8 pr-8 bg-[#283046] rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-[#d0d2d6]">
-              <h2 className="text-3xl font-bold">15</h2>
+              <h2 className="text-3xl font-bold">{pendingOrders?.pendingOrdersCount}</h2>
               <span className="text-md font-medium">Pending Orders</span>
             </div>
             <div className="w-[46px] h-[47px] rounded-full bg-[#e000e81f] flex justify-center items-center text-xl">
@@ -135,7 +169,7 @@ const Dashboard = () => {
           </div>
           <div className="flex justify-between items-center pt-6 pb-6 pl-8 pr-8 bg-[#283046] rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-[#d0d2d6]">
-              <h2 className="text-3xl font-bold">08</h2>
+              <h2 className="text-3xl font-bold">{processingOrders?.processingOrdersCount}</h2>
               <span className="text-md font-medium">Processing Orders</span>
             </div>
             <div className="w-[46px] h-[47px] rounded-full bg-[#e0e8001f] flex justify-center items-center text-xl">
@@ -144,7 +178,7 @@ const Dashboard = () => {
           </div>
           <div className="flex justify-between items-center pt-6 pb-6 pl-8 pr-8 bg-[#283046] rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-[#d0d2d6]">
-              <h2 className="text-3xl font-bold">20</h2>
+              <h2 className="text-3xl font-bold">{deliveredOrders?.deliveredOrdersCount}</h2>
               <span className="text-md font-medium">Delivered Orders</span>
             </div>
             <div className="w-[46px] h-[47px] rounded-full bg-[#28c76f1f] flex justify-center items-center text-xl">
@@ -153,7 +187,7 @@ const Dashboard = () => {
           </div>
           <div className="flex justify-between items-center pt-6 pb-6 pl-8 pr-8 bg-[#283046] rounded-md gap-3">
             <div className="flex flex-col justify-start items-start text-[#d0d2d6]">
-              <h2 className="text-3xl font-bold">35</h2>
+              <h2 className="text-3xl font-bold">{allOrders?.allOrdersCount}</h2>
               <span className="text-md font-medium">Total Orders</span>
             </div>
             <div className="w-[46px] h-[47px] rounded-full bg-[#7367f01f] flex justify-center items-center text-xl">
@@ -172,43 +206,51 @@ const Dashboard = () => {
             />
           </div>
           <div className="flex flex-col gap-5 mx-3 md:mx-0 md:gap-12 md:mt-4 text-[#9ca1abff]">
-            <div className="flex flex-col justify-between gap-6 md:gap-0 px-5 py-4 bg-[#283046] w-full md:w-[80%] md:h-[37%] rounded-lg">
-              <p>
+            <div className="flex flex-row items-center justify-between gap-6 md:gap-0 px-5 py-7 bg-[#283046] w-full md:w-[80%] md:h-[37%] rounded-lg">
+            <p className="text-[58px] pr-2 text-[teal]"><MdOutlineAutoGraph /></p>
+            <span className="pl-5">
+            <p>
                 You can add the order by providing all details for the order
               </p>
               <div className="flex justify-between">
                 <span className="flex items-center">
-                  <p className="text-[35px] pr-2"><MdOutlineAutoGraph /></p>
                 <p className="text-[20px] text-[#9ca1abff]">
                   Total Orders Count
                 </p>
                 </span>
-                <p className="text-[20px] text-[#b5b5b5]">50</p>
+                <p className="text-[20px] text-[#b5b5b5]">{allOrders?.allOrdersCount}</p>
               </div>
+            </span>
+              
+             
             </div>
-            <div className="flex flex-col justify-between gap-6 md:gap-0 px-5 py-4 bg-[#283046] w-full md:w-[80%] md:h-[39%] rounded-lg">
-              <p>
+            <div className="flex flex-row items-center justify-between gap-6 md:gap-0 px-5 py-7 bg-[#283046] w-full md:w-[80%] md:h-[39%] rounded-lg">
+                  <p className="text-[58px] pr-2 text-[magenta]"><MdOutlinePending /></p>
+            <span className="pl-5">
+            <p>
                  You can update the status of orders by using dashboard there are
               </p>
               <div className="flex justify-between">
                 <span className="flex items-center">
-                  <p className="text-[35px] pr-2"><MdOutlinePending /></p>
                 <p className="text-[20px] text-[#9ca1abff]">
                  Total Pending Orders Count
                 </p>
                 </span>
-                <p className="text-[20px] text-[#b5b5b5]">13</p>
+                <p className="text-[20px] text-[#b5b5b5]">{pendingOrders?.pendingOrdersCount}</p>
               </div>
+            </span>
+              
+              
             </div>
           </div>
         </div>
         {/* Add order form */}
-        <div className="flex flex-col bg-[#283046] p-5 mr-[7%] ml-[7%] mb-4 rounded-md">
+        <div className="flex flex-col bg-[#283046] p-5 mr-[7%] ml-[7%] mb-4 rounded-md add_orders">
           <p className="text-white text-[25px] flex justify-center font-medium pb-9">
             Add Orders
           </p>
-          <form onSubmit={submit} className="flex flex-col gap-10">
-            <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between px-2 md:px-10">
+          <form onSubmit={submit} className="flex flex-col gap-10 sm:justify-center">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between px-2 md:px-10 ">
               <span className="flex flex-col gap-1">
                 <label htmlFor="" className="text-white text-[13px] font-thin">
                   Add User Email
@@ -221,7 +263,7 @@ const Dashboard = () => {
                   placeholder="Enter user email"
                   name="user_email"
                   required
-                  className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
+                  className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w- [250px]  focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
                 />
               </span>
               <span className="flex flex-col gap-1">
@@ -241,15 +283,15 @@ const Dashboard = () => {
               </span>
               <span className="flex flex-col gap-1">
                 <label htmlFor="" className="text-white text-[13px] font-thin">
-                  Add Order Date
+                  Add Order Shipping Address
                 </label>
                 <input
-                  id="order_date"
+                  id="order_shipping_address"
                   onChange={inputHandle}
-                  value={state.order_date}
+                  value={state.order_shipping_address}
                   type="text"
-                  placeholder="Enter Order date"
-                  name="order_date"
+                  placeholder="Enter shipping address"
+                  name="order_shipping_address"
                   required
                   className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
                 />
@@ -274,15 +316,15 @@ const Dashboard = () => {
               </span>
               <span className="flex flex-col gap-1">
                 <label htmlFor="" className="text-white text-[13px] font-thin">
-                  Add Order Shipping Address
+                  Enter Shipping Service
                 </label>
                 <input
-                  id="order_shipping_address"
+                  id="shipping_service"
                   onChange={inputHandle}
-                  value={state.order_shipping_address}
+                  value={state.shipping_service}
                   type="text"
-                  placeholder="Enter shipping address"
-                  name="order_shipping_address"
+                  placeholder="Enter shipping service"
+                  name="shipping_service"
                   required
                   className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
                 />
@@ -342,10 +384,10 @@ const Dashboard = () => {
                 <input
                   id="order_shipping_date"
                   onChange={inputHandle}
-                  value={state.order_shipping_date}
-                  type="text"
+                  value={state.order_shipped_date}
+                  type="date"
                   placeholder="Enter Order shipping date"
-                  name="order_shipping_date"
+                  name="order_shipped_date"
                   required
                   className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
                 />
@@ -361,7 +403,7 @@ const Dashboard = () => {
                   id="order_delivery_date"
                   onChange={inputHandle}
                   value={state.order_delivery_date}
-                  type="text"
+                  type="date"
                   placeholder="Enter delivery date"
                   name="order_delivery_date"
                   required
@@ -401,21 +443,7 @@ const Dashboard = () => {
             </div>
 
             <div className="flex flex-col md:flex-row gap-0 md:gap-[7rem]  items-center md:px-10">
-              <span className="flex flex-col gap-1">
-                <label htmlFor="" className="text-white text-[13px] font-thin">
-                  Enter Shipping Service
-                </label>
-                <input
-                  id="shipping_service"
-                  onChange={inputHandle}
-                  value={state.shipping_service}
-                  type="text"
-                  placeholder="Enter shipping service"
-                  name="shipping_service"
-                  required
-                  className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
-                />
-              </span>
+             
               <span className="mt-5">
                 <button className="bg-blue-700 px-14 py-3 text-white border-blue-700 rounded-lg shadow-blue-900 hover:bg-blue-800">
                   Add Order
@@ -424,7 +452,53 @@ const Dashboard = () => {
             </div>
           </form>
         </div>
-        <Table />
+        <h1 className="text-4xl mx-auto text-white">Order History</h1>
+        <Table  allOrders={allOrders}/>
+        <h1 className="text-4xl mx-auto text-white mt-40">Search Your Order</h1>
+
+
+
+
+        <span className="bg-[#283046] w-[86%] ml-[7%] rounded-lg px-10 py-5 mb-48 search_orders">
+        <p className="text-white text-[22px] mb-3  ">Search Order</p>
+        <span>
+          <form onSubmit={submit} className="flex flex-col md:flex-row gap-5">
+            <input
+              id="order_id"
+              type="text"
+              placeholder="Enter Order ID"
+              name="order_id"
+              onChange={inputHandle}
+              value={search.order_id}
+              required
+              className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
+            />
+            <input
+              id="tracking_id"
+              type="text"
+              placeholder="Enter Tracking ID"
+              name="tracking_id"
+              onChange={inputHandle}
+              value={search.tracking_id}
+              required
+              className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
+            />
+            <input
+              id="user_email"
+              type="text"
+              placeholder="Enter User Email"
+              name="user_email"
+              onChange={inputHandle}
+              value={search.user_email}
+              required
+              className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
+            />
+            <button className="bg-blue-700 px-7 py-1 text-white border-blue-700 rounded-lg shadow-blue-900 hover:bg-blue-800">
+              Search Order
+            </button>
+          </form>
+        </span>
+      </span>
 
       </div>
     </div>

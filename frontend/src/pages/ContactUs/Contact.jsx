@@ -116,7 +116,7 @@ const Contact = () => {
             scrolling="no"
             marginheight="0"
             marginwidth="0"
-            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.9908546224415!2d5.168573975710809!3d52.22538395800143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c66b67a13ec7ff%3A0x6baa214975506856!2sDe%20Nederlandse%20Kluis!5e0!3m2!1sen!2s!4v1700291038162!5m2!1sen!2s"
           >
             <a href="https://www.maps.ie/population/">Population mapping</a>
           </iframe>

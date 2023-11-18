@@ -3,69 +3,23 @@ import "./components.css";
 import { FaEye } from "react-icons/fa";
 import OrderDetails from "./OrderDetails";
 
-const Table = () => {
-  const[search,setSearch]=useState({
-    order_id :'',
-    tracking_id :'',
-    user_email:''
-  })
-  const inputHandle=(e)=>{
-    setSearch({
-      ...search,
-      [e.target.name] : e.target.value,
-    })
-  }
-  const submit = (e) => {
-    e.preventDefault();
-    console.log(search);
-  };
+const Table = ({ allOrders }) => {
   const [showDetails, setShowDetails] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
-  const handleEyeIconClick = () => {
-    setShowDetails(!showDetails);
+  const handleEyeIconClick = (order) => {
+    setSelectedOrder(order);
+    setShowDetails(true);
   };
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+    return formattedDate;
+  };
+
   return (
     <>
-      <span className="bg-[#283046] w-[86%] ml-[7%] rounded-lg px-10 py-5">
-        <p className="text-white text-[22px] mb-3  ">Search Order</p>
-        <span>
-          <form onSubmit={submit} className="flex flex-col md:flex-row gap-5">
-            <input
-              id="order_id"
-              type="text"
-              placeholder="Enter Order ID"
-              name="order_id"
-              onChange={inputHandle}
-              value={search.order_id}
-              required
-              className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
-            />
-            <input
-              id="tracking_id"
-              type="text"
-              placeholder="Enter Tracking ID"
-              name="tracking_id"
-              onChange={inputHandle}
-              value={search.tracking_id}
-              required
-              className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
-            />
-            <input
-              id="user_email"
-              type="text"
-              placeholder="Enter User Email"
-              name="user_email"
-              onChange={inputHandle}
-              value={search.user_email}
-              required
-              className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
-            />
-            <button className="bg-blue-700 px-7 py-1 text-white border-blue-700 rounded-lg shadow-blue-900 hover:bg-blue-800">
-              Search Order
-            </button>
-          </form>
-        </span>
-      </span>
       <div className="Table">
         <div className="tableContainer">
           <table>
@@ -82,65 +36,41 @@ const Table = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>#1231323</td>
-                <td>10-01-23</td>
-                <td>15-02-23</td>
-                <td>COSCO Shipping Holdings</td>
-                <td>
-                  <span className="pending">Pending</span>
-                </td>
-                <td className="actions">
-                  <li
-                    className="p-[6px] w-[40px] cursor-pointer bg-green-500 rounded hover:shadow-lg hover:shadow-green-500/50 flex justify-center items-center"
-                    onClick={handleEyeIconClick}
-                  >
-                    <FaEye />
-                  </li>
-                </td>
-                {showDetails && (
-                  <OrderDetails
-                    showDetails={showDetails}
-                    setShowDetails={setShowDetails}
-                  />
-                )}
-              </tr>
-
-              <tr>
-                <td>1</td>
-                <td>#1231323</td>
-                <td>10-01-23</td>
-                <td>15-02-23</td>
-                <td>COSCO Shipping Holdings</td>
-                <td>
-                  <span className="pending">Pending</span>
-                </td>
-                <td className="actions">
-                  <li className="p-[6px] w-[40px] cursor-pointer bg-green-500 rounded hover:shadow-lg hover:shadow-green-500/50 flex justify-center items-center">
-                    <FaEye />
-                  </li>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>#1231323</td>
-                <td>10-01-23</td>
-                <td>15-02-23</td>
-                <td>TrackCourier.io</td>
-                <td>
-                  <span className="posted">Shipped</span>
-                </td>
-                <td className="actions">
-                  <li className="p-[6px] w-[40px] cursor-pointer bg-green-500 rounded hover:shadow-lg hover:shadow-green-500/50 flex justify-center items-center">
-                    <FaEye />
-                  </li>
-                </td>
-              </tr>
+              {allOrders?.allOrders?.map((order) => {
+                return (
+                  <>
+                    
+                  <tr key={order.order_id}>
+                    <td>{order.order_id}</td>
+                    <td>{order.tracking_id}</td>
+                    <td>{formatDate(order.order_date)}</td>
+                    <td>{formatDate(order.order_delivery_date)}</td>
+                    <td>{order.shipping_service}</td>
+                    <td className={order.order_status}>{order.order_status}</td>
+                    <td>
+                      <FaEye
+                        className="eyeIcon bg-green-600 text-4xl rounded-lg py-1 px-2 text-white cursor-pointer"
+                        onClick={() => handleEyeIconClick(order)}
+                      />
+                    </td>
+                  </tr>
+                  <br />
+                  </>
+                );
+              })}
             </tbody>
           </table>
         </div>
       </div>
+
+      {showDetails && selectedOrder && (
+        <OrderDetails
+          order={selectedOrder}
+          showDetails={showDetails}
+          setShowDetails={setShowDetails}
+
+        />
+      )}
     </>
   );
 };
