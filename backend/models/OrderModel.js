@@ -8,8 +8,8 @@ const OrderSchema = new mongoose.Schema({
   },
   order_date: {
     type: Date,
+    default: Date.now,    
     required: true,
-    unique: true,
   },
   order_status: {
     type: String,
@@ -58,6 +58,7 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   
 });
 
