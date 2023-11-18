@@ -172,6 +172,133 @@ nav .mobile-menu-icon {
   font-size: 12px;
 
 }
+.tableContainer {
+  background-color: #283046;
+  padding: 20px;
+  border-radius: 10px;
+}
+.Table{
+  width: 86%;
+  margin-left: 88px;
+}
+
+.tableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+.tableContainer th{
+  border-bottom: 1px solid #86A5C9;
+}
+.tableContainer th
+{
+  padding: 19px;
+  text-align: left;
+font-family: 'Inter',sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+.tableContainer td{
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  text-align: start;
+}
+.tableContainer tbody tr td{
+  font-size: 14px;
+  font-family: Poppins, sans-serif;
+}
+.tableContainer{
+  position: relative;
+}
+.tableContainer tbody{
+  position: relative;
+  top: 10px;
+}
+.tableContainer tbody tr:hover {
+  background-color: #252e3b;
+}
+
+.tableContainer tbody  td{
+  color: #d0d2d6;
+  
+}
+
+table tbody tr td:nth-child(1){
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+table tbody tr td:last-child{
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+.posted{
+  background-color: rgba(23, 116, 23, 0.534);
+  color: rgba(255, 255, 255, 0.568);
+  border-radius: 10px;
+  height: 10px;
+  width: 100px;
+  padding: 10px 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+}
+.pending{
+  background-color: rgba(116, 50, 116, 0.712);
+  color: rgba(255, 255, 255, 0.425);
+  border-radius: 10px;
+  width: 100px;
+  height: 10px;
+  padding: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+}
+.actions i{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.view-profile-wrap{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border: 1px solid black;
+}
+.view-profile-detail-container{
+  display: flex;
+  background-color: #283046;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  height: 90vh;
+  overflow-y: auto;
+  animation: fadeInUp 0.5s ease;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+@media screen and (max-width:832px) {
+  .tableContainer{
+   
+      width: 90%;
+      overflow-x: scroll;
+      margin: 80px auto;
+  }
+  .Table{
+    width: 99%;
+    margin-left: 0px;
+    margin-top: -60px;
+  }
+}
 
 
 @media screen and (max-width:786px) {

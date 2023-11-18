@@ -9,8 +9,12 @@ import Services from './pages/Services/Services'
 import Track from './pages/Track/Track'
 import Shipping from './pages/Shipping/Shipping'
 import Storage from './pages/Storage/Storage'
+<<<<<<< HEAD
 import Footer from './components/Footer'
 import Login from './pages/Login/Login'
+=======
+import Dashboard from './pages/Dashboard/Dashboard'
+>>>>>>> 05c4767c10b6a82169a44627ac437725102dc6cf
 
 const App = () => {
   return (
@@ -26,8 +30,12 @@ const App = () => {
   <Route path='/track' element={<Track />} />
   <Route path='/shipping' element={<Shipping />} />
   <Route path='/storage' element={<Storage/>}/>
+<<<<<<< HEAD
   <Route path='/login' element={<Login/>}/>
 
+=======
+  <Route path='/dashboard' element={<Dashboard/>}/>
+>>>>>>> 05c4767c10b6a82169a44627ac437725102dc6cf
 </Routes>
 <Footer/>
     </>
