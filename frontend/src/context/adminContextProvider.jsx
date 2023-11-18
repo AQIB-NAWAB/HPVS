@@ -13,6 +13,8 @@ const AdminContextProvider = (props) => {
   const [deliveredOrders,setDeliveredOrders]=useState()
   const [allOrders,setAllOrders]=useState()
   const [chartData,setChartData]=useState()
+  const [allSearchOrders,setAllSearchOrders]=useState([])
+  const [trackOrder,setTrackOrder]=useState()
 const navigate=useNavigate();
   const loginAdmin=async (email,password)=>{
   try {
@@ -109,8 +111,28 @@ const addOrder=async (order)=>{
 
   }
 }
+// track the order 
+const trackOrderByTID=async (tracking_id)=>{
+  try {
+    const result=await axios.get(`${baseUrl}/searchOrder/?tracking_id=${tracking_id}`)
+    setTrackOrder(result.data)
+    console.log(result.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+// search orders by tracking_id or order_id or user_email passing passed from query
+const searchOrder=async (search)=>{
+  try {
+    const result=await axios.get(`${baseUrl}/searchOrder?order_id=${search.order_id}&tracking_id=${search.tracking_id}&user_email=${search.user_email}`)
+    setAllSearchOrders(result.data)
+    console.log(result.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
   return (
-    <AdminContext.Provider value={{ admin,loginAdmin,setAdmin,pendingOrders,getPendingOrders,getProcessingOrders,processingOrders,getAllOrders,allOrders,deliveredOrders,getDeliveredOrders,chartData,getChartData ,updateOrderStatus,addOrder}}>
+    <AdminContext.Provider value={{ admin,loginAdmin,setAdmin,pendingOrders,getPendingOrders,getProcessingOrders,processingOrders,getAllOrders,allOrders,deliveredOrders,getDeliveredOrders,chartData,getChartData ,updateOrderStatus,addOrder,searchOrder,allSearchOrders,trackOrder,trackOrderByTID}}>
       {props.children}
     </AdminContext.Provider>
   );

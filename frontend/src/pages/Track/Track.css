@@ -47,3 +47,12 @@
 .tracking_page .content .message{
     font-size: 12px;
 }
+
+@media screen and (max-width:786px) {
+    .tracking_page .custom_input{
+        width: 95% !important;
+        justify-content: center !important;
+
+    }
+
+}

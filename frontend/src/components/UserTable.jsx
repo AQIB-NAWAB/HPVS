@@ -3,8 +3,8 @@ import "./components.css";
 import { FaEye } from "react-icons/fa";
 import OrderDetails from "./OrderDetails";
 
-const Table = ({ allOrders, isDashboard }) => {
-  const [showDetails, setShowDetails] = useState(false);
+const UserTable = ({ allOrders, isDashboard }) => {
+const [showDetails, setShowDetails] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const handleEyeIconClick = (order) => {
     setSelectedOrder(order);
@@ -19,7 +19,7 @@ const Table = ({ allOrders, isDashboard }) => {
 
   return (
     <>
-      <div className="Table">
+      <div className="Table ">
         <div className="tableContainer">
           <table>
             <thead>
@@ -84,6 +84,6 @@ const Table = ({ allOrders, isDashboard }) => {
       )}
     </>
   );
-};
+}
 
-export default Table;
+export default UserTable

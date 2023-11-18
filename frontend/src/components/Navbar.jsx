@@ -6,7 +6,12 @@ import "./components.css";
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -32,37 +37,51 @@ const Navbar = () => {
           scrolling ? "bg-white text-black shadow-md" : "bg-transparent text-white"
         }`}
       >
-        <Link to={"/"} className="logo">
+        <Link to={"/"} className="logo" onClick={scrollToTop} >
           HPVS
         </Link>
         <div className={`links ${isMobile ? 'mobile' : ''}`}>
           <ul className={`flex ${isMobile ? 'flex-col' : 'flex-row'} gap-8`}>
             <li>
-              <Link to="/">Home</Link>
+              <Link onClick={scrollToTop} to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about"onClick={()=>setIsMobile(false)}>About</Link>
+              <Link  to="/about"onClick={()=>{ setIsMobile(false)
+               scrollToTop()} 
+              }>About</Link>
             </li>
             <li>
-              <Link to="/services"onClick={()=>setIsMobile(false)}>Services</Link>
+              <Link  to="/services"onClick={()=>{ setIsMobile(false)
+               scrollToTop()} 
+              }>Services</Link>
             </li>
             <li>
-              <Link to="/shipping" onClick={()=>setIsMobile(false)}>Shipping </Link>
+              <Link  to="/shipping" onClick={()=>{ setIsMobile(false)
+               scrollToTop()} 
+              }>Shipping </Link>
             </li>
             <li>
-              <Link to="/storage" onClick={()=>setIsMobile(false)}>Storage</Link>
+              <Link  to="/storage" onClick={()=>{ setIsMobile(false)
+               scrollToTop()} 
+              }>Storage</Link>
             </li>
             <li>
-              <Link to="/track" onClick={()=>setIsMobile(false)}>Track</Link>
+              <Link  to="/track" onClick={()=>{ setIsMobile(false)
+               scrollToTop()} 
+              }>Track</Link>
             </li>
             <li>
-              <Link to="/contact" onClick={()=>setIsMobile(false)}>Contact</Link>
+              <Link  to="/contact" onClick={()=>{ setIsMobile(false)
+               scrollToTop()} 
+              }>Contact</Link>
             </li>
           </ul>
         </div>
-        <button className="trackNowBtn"onClick={()=>setIsMobile(false)}>
+        <Link  to={"/track"} className="trackNowBtn"onClick={()=>{ setIsMobile(false)
+               scrollToTop()} 
+              }>
           Track Now
-        </button>
+        </Link>
         <div className="mobile-menu-icon" onClick={handleMobileMenu}>
           {isMobile ? <FaTimes /> : <FaBars />}
         </div>

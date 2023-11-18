@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Dashboard = () => {
-  const {setAdmin,admin,getPendingOrders,pendingOrders,getProcessingOrders,processingOrders,getAllOrders,allOrders,deliveredOrders,getDeliveredOrders,chartData,getChartData,addOrder}=useAdminContext()
+  const {setAdmin,admin,getPendingOrders,pendingOrders,getProcessingOrders,processingOrders,getAllOrders,allOrders,deliveredOrders,getDeliveredOrders,chartData,getChartData,addOrder,searchOrder,allSearchOrders}=useAdminContext()
   const[search,setSearch]=useState({
     order_id :'',
     tracking_id :'',
@@ -144,12 +144,17 @@ getAllOrders();
 getChartData()
 },[])
 
+const handleSearch=(e)=>{
+  e.preventDefault()
+  searchOrder(search)
+  
+}
 
 
   return (
     <div className="bg-[#161d31] w-[100%] h-[100%]">
       <div className="flex flex-col gap-6">
-        <div className="mt-36 flex justify-between text-white mt-20 mx-[7.9%] rounded-md bg-[#283046] py-7 px-6 items-center border-b-8  border-[#41437D] md:mb-10">
+        <div className="mt-36 flex lg:fkex-row md:flex-row dashbaord_header justify-between text-white mt-20 mx-[7.9%] rounded-md bg-[#283046] py-7 px-6 items-center border-b-8  border-[#41437D] md:mb-10">
           <p className="border border-white pt-2 pb-2 pl-3 pr-3 font-bold rounded-sm tracking-[5px] text-[20px]">
             HPVS
           </p>
@@ -453,7 +458,7 @@ getChartData()
           </form>
         </div>
         <h1 className="text-4xl mx-auto text-white">Order History</h1>
-        <Table  allOrders={allOrders}/>
+        <Table  allOrders={allOrders} isDashboard={true}/>
         <h1 className="text-4xl mx-auto text-white mt-40">Search Your Order</h1>
 
 
@@ -462,15 +467,14 @@ getChartData()
         <span className="bg-[#283046] w-[86%] ml-[7%] rounded-lg px-10 py-5 mb-48 search_orders">
         <p className="text-white text-[22px] mb-3  ">Search Order</p>
         <span>
-          <form onSubmit={submit} className="flex flex-col md:flex-row gap-5">
+          <form onSubmit={(e)=>handleSearch(e)} className="flex flex-col md:flex-row gap-5">
             <input
               id="order_id"
               type="text"
               placeholder="Enter Order ID"
               name="order_id"
-              onChange={inputHandle}
+              onChange={(e)=>setSearch({...search,order_id:e.target.value})}
               value={search.order_id}
-              required
               className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
             />
             <input
@@ -478,9 +482,8 @@ getChartData()
               type="text"
               placeholder="Enter Tracking ID"
               name="tracking_id"
-              onChange={inputHandle}
+              onChange={(e)=>setSearch({...search,tracking_id:e.target.value})}
               value={search.tracking_id}
-              required
               className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
             />
             <input
@@ -488,9 +491,8 @@ getChartData()
               type="text"
               placeholder="Enter User Email"
               name="user_email"
-              onChange={inputHandle}
+              onChange={(e)=>setSearch({...search,user_email:e.target.value})}
               value={search.user_email}
-              required
               className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
             />
             <button className="bg-blue-700 px-7 py-1 text-white border-blue-700 rounded-lg shadow-blue-900 hover:bg-blue-800">
@@ -498,7 +500,16 @@ getChartData()
             </button>
           </form>
         </span>
+        {
+        allSearchOrders?.orders&& (
+          <div className="w-[105%] "> 
+
+          <Table allOrders={{allOrders:allSearchOrders?.orders}} isDashboard={true}/>
+          </div>
+        )
+      }
       </span>
+     
 
       </div>
     </div>

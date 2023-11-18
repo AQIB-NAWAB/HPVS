@@ -12,7 +12,7 @@ import Storage from './pages/Storage/Storage'
 import Footer from './components/Footer'
 import Login from './pages/Login/Login'
 import toast, { Toaster } from 'react-hot-toast';
-
+import "./App.css"
 import Dashboard from './pages/Dashboard/Dashboard'
 import { useAdminContext } from './context/adminContextProvider'
 

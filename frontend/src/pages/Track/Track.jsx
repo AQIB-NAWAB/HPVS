@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdLocalShipping } from 'react-icons/md'
 import  "./Track.css"
+import { useAdminContext } from '../../context/adminContextProvider'
+import Table from '../../components/Table'
+import UserTable from '../../components/UserTable'
 const Track = () => {
+  const [search,setSearch]=useState({
+    tracking_id:'',
+    order_id:'',
+    user_email:'',
+
+  })
+  const {trackOrderByTID,trackOrder}=useAdminContext();
+
+  const handleTrack=(e)=>{
+    e.preventDefault()
+    trackOrderByTID(search.tracking_id)
+    
+  }
   return (
     <div className='tracking_page'>
     <div className="bg_overlay">
@@ -17,12 +33,20 @@ const Track = () => {
 
           <MdLocalShipping className='text-xl'  />
           </button>
-          <input type="text" placeholder='SGUxxxxxxxx'/>
-          <button>Track</button>
+          <input type="text" placeholder='SGUxxxxxxxx' value={search.tracking_id} onChange={(e)=>setSearch({...search,tracking_id:e.target.value})}/>
+          <button onClick={(e)=>handleTrack(e)}>Track</button>
           </div>
           <div className="message">
           Stay updated on your shipment!
           </div>
+          {
+            trackOrder?.orders&& (
+          <div className="w-[105%] "> 
+
+          <UserTable allOrders={{allOrders:trackOrder?.orders}}/>
+          </div>
+        )
+      }
         </div>
     </div>
   )

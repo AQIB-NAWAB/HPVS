@@ -1,10 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Hero from '../../components/Hero'
 import "./Home.css"
 import { MdLocalShipping } from "react-icons/md";
 import { FaThumbsUp } from "react-icons/fa";
+import { useAdminContext } from '../../context/adminContextProvider';
+import Table from '../../components/Table';
+import UserTable from '../../components/UserTable';
 
 const Home = () => {
+  const [search,setSearch]=useState({
+    tracking_id:'',
+    order_id:'',
+    user_email:'',
+
+  })
+  
+  const {trackOrderByTID,trackOrder}=useAdminContext();
+    
+  const handleTrack=(e)=>{
+    e.preventDefault()
+    trackOrderByTID(search.tracking_id)
+  }
   const reasons=[
     {
       heading:"Duty Free",
@@ -38,7 +54,7 @@ const Home = () => {
    
   ]
   return (
-    <div>
+    <div className='home_page'>
      <Hero/>
       {/* Tracking components */}
       <div className="home_page_tracker py-12 flex flex-row justify-center items-center text-white">
@@ -49,14 +65,23 @@ const Home = () => {
 
           <MdLocalShipping className='text-xl'  />
           </button>
-          <input type="text" placeholder='SGUxxxxxxxx'/>
-          <button>Track</button>
+          <input type="text" placeholder='SGUxxxxxxxx' value={search.tracking_id} onChange={(e)=>setSearch({...search,tracking_id:e.target.value})}/>
+          <button onClick={(e)=>handleTrack(e)}>Track</button>
           </div>
           <div className="message">
           Stay updated on your shipment!
           </div>
         </div>
+        
       </div>
+      {
+          trackOrder?.orders&& (
+          <div className=" "> 
+
+          <UserTable allOrders={{allOrders:trackOrder?.orders}}/>
+          </div>
+        )
+      }
 <div className="storage_solution">
   <h1 className='text-3xl '>SECURED STORAGE SOLUTION</h1>
   <hr  className='w-10 h-2 rounded-full border-b-2 custom_border '/>

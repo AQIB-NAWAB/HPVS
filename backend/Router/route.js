@@ -69,10 +69,13 @@ Router.post("/addOrder", async (req, res) => {
 
     const order = new Order(req.body);
     const result = await order.save();
+    // get the hosted link of the site
+    const host=req.get('host')
+
     await sendEmail({
       email: result.user_email,
       subject:"Order Placed Successfully",
-      message:`Your order has been placed successfully. Please check your order details. Tracking Id for your order is ${result.tracking_id} . Thank you for shopping with us. Have a nice day.  `,
+      message:`Your order has been placed successfully. Please check your order details. Tracking Id for your order is ${result.tracking_id} . Visit our site to get further details ${host} . Thank you for shopping with us. Have a nice day.  `,
     })
     res.status(200).json({ order: result });
   } catch (error) {
@@ -93,10 +96,12 @@ Router.put("/updateOrderStatus/:id", async (req, res) => {
     order.order_status=req.body.order_status
 
     const result=await order.save()
+    // get the hosted link of the site
+    const host=req.get('host')
     await sendEmail({
       email: result.user_email,
-      subject:`Order Status Updated to ${req.body.order_status}`,
-      message:`Your order status has been updated to ${req.body.order_status} . Please check your order details. Tracking Id for your order is ${result.tracking_id} . Thank you for shopping with us. Have a nice day.  `,
+      subject:`HPSV  Order Status Updated to ${req.body.order_status}`,
+      message:`Your order status has been updated to ${req.body.order_status} . Please check your order details. Tracking Id for your order is ${result.tracking_id} .Visit our site ${host}/track . Thank you for shopping with us. Have a nice day.  `,
     });
     res.status(200).json({message:`Order Status Updated to ${req.body.order_status}` });
   } catch (error) {
@@ -126,21 +131,34 @@ Router.get("/getOrderDetails/:tracking_id", async (req, res) => {
   }
 });
 
-// search the order by many fields using query params
+// search the order by any of fields among these three order_id tracking id and user_email using query params
 Router.get("/searchOrder", async (req, res) => {
   try {
-    const result = await Order.find(
-      { 
-        order_id: req.query.order_id,
-        tracking_id: req.query.tracking_id,
-        user_email: req.query.user_email,
-      },
-    );
-    res.status(200).json({ order: result });
+    const order_id = req.query.order_id;
+    const tracking_id = req.query.tracking_id;
+    const user_email = req.query.user_email;
+    // if order_id is passed in query params
+    const query={
+
+    }
+    // check the order_id tracking_id and user_email  is passed or not if they are paased then add them to query object
+    if(order_id){
+      query.order_id=order_id
+    }
+    if(tracking_id){
+      query.tracking_id=tracking_id
+    }
+    if(user_email){
+      query.user_email=user_email
+    }
+    // now find the order using query object
+    const result =await Order.find(query)
+res.json({orders:result})
+
   } catch (error) {
     res.status(500).json({ error: error });
   }
-});
+}); 
 
 Router.get('/orders/monthly-count-with-names', async (req, res) => {
   try {

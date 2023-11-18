@@ -22,3 +22,10 @@
         text-align: center;
     }
 }
+
+@media screen and (max-width:786px) {
+    .dashbaord_header{
+        flex-direction: column;
+        gap: 20px;   
+       }    
+}

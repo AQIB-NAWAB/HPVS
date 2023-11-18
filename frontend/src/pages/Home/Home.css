@@ -2,6 +2,11 @@
     background-color: #2250FC;
     gap: 30px;
 }
+.home_page{
+    display: flex;
+    flex-direction: column;
+}
+
 .home_page_tracker .content{
     display: flex;
     flex-direction: column;
@@ -157,5 +162,8 @@ color: rgb(59, 59, 59);
    }
    .storage_solution video{
     width: 90%;
+   }
+   .home_page_tracker .custom_input{
+    width: 50% !important;
    }
 }
