@@ -54,6 +54,11 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  user_email:{
+    type: String,
+    required: true,
+  },
+  
 });
 
 const Order = mongoose.model("Order", OrderSchema);

@@ -53,6 +53,54 @@ nav .trackNowBtn:hover {
   background: #000;
   color: #fff;
 }
+/* Add these styles to your existing CSS file */
+nav .links.mobile {
+  display: none;
+}
+
+nav .mobile-menu-icon {
+  display: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  nav .links {
+    display: none;
+  }
+
+  nav .links.mobile {
+    display: block;
+    position: absolute;
+    top: 70px; /* Adjust as needed */
+    left: 0;
+    right: 0;
+    background: #fff;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  nav .mobile-menu-icon {
+    display: block;
+  }
+  nav{
+    background-color: white !important;
+    color: #000 !important;
+  }
+  nav ul {
+    height: 100vh;
+    justify-content: center;
+  }
+  nav  .trackNowBtn{
+    background-color: #000 !important;
+    color: white !important;
+    padding: 8px 7px;
+    font-size: 13px;
+    font-weight: 800;
+  }
+}
 
 .hero {
   position: relative;

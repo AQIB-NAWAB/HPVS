@@ -32,7 +32,6 @@ const Location = () => {
         <p className="pl-4 md:pl-0 text-[15px] text-[#5b5959]">This is not too good to be true, make your own history and tell your story in future</p>
         <button className="bg-[#2250fcff] rounded-[70px] pt-[15px] pb-[15px] pl-[30px] pr-[30px] text-white mt-6 hover:bg-[#3960ff]">Get Started</button>
       </div>
-      <Footer/>
     </div>
   );
 };

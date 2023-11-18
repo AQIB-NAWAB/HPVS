@@ -174,7 +174,6 @@ const About = () => {
           Get Started
         </button>
       </div>
-      <Footer />
     </div>
   );
 };
