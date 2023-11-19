@@ -75,8 +75,12 @@ closeModel()
               <p className="text-[#c0c6d3]">${order?.order_total}</p>
             </span>{" "}
             <span className="flex gap-2 items-center">
-              <p className="text-[#ffffffd7] text-[17px]">Shipping Service :</p>
+              <p className="text-[#ffffffd7] text-[17px]"> Service :</p>
               <p className="text-[#c0c6d3]">{order?.shipping_service}</p>
+            </span>
+            <span className="flex gap-2 items-center">
+              <p className="text-[#ffffffd7] text-[17px]">Item  (weight)</p>
+              <p className="text-[#c0c6d3]">{order?.item} ({order.weight})</p>
             </span>
             <span className="flex justify-between">
                 <span className="flex gap-2 items-center">

@@ -58,6 +58,14 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  item:{
+    type:String,
+
+  },
+  weight:{
+    type:String,
+
+  },
 
   
 });

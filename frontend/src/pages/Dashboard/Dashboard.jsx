@@ -16,6 +16,7 @@ const Dashboard = () => {
     tracking_id :'',
     user_email:''
   })
+  const [showStorageFields, setShowStorageFields] = useState(false);
   const navigate=useNavigate()
   const [state, setState] = useState({
     user_email: "",
@@ -28,16 +29,30 @@ const Dashboard = () => {
     order_shipped_date: "",
     order_delivery_date: "",
     shipping_service: "",
+    weight: "",
+    item: "",
+
   });
   const inputHandle = (e) => {
+    const { name, value } = e.target;
+    if (name === "shipping_service") {
+      if (value === "storage") {
+        setShowStorageFields(true);
+      } else {
+        setShowStorageFields(false);
+      }
+    }
     setState({
       ...state,
       [e.target.name]: e.target.value,
+
     });
   };
+
   const submit = (e) => {
     e.preventDefault();
-    addOrder(state)
+    
+    addOrder(state);
   };
 
   const data = {
@@ -321,9 +336,9 @@ const handleSearch=(e)=>{
               </span>
               <span className="flex flex-col gap-1">
                 <label htmlFor="" className="text-white text-[13px] font-thin">
-                  Enter Shipping Service
+                  Enter  Service
                 </label>
-                <input
+                <select
                   id="shipping_service"
                   onChange={inputHandle}
                   value={state.shipping_service}
@@ -332,7 +347,10 @@ const handleSearch=(e)=>{
                   name="shipping_service"
                   required
                   className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
-                />
+                >
+<option value="shipping" style={{color:"black"}}>Shipping</option>
+<option value="storage" style={{color:"black"}}>Storage</option>
+                </select>
               </span>
               <span className="flex flex-col gap-1">
                 <label htmlFor="" className="text-white text-[13px] font-thin">
@@ -423,7 +441,7 @@ const handleSearch=(e)=>{
                   id="order_total"
                   onChange={inputHandle}
                   value={state.order_total}
-                  type="text"
+                  type="number"
                   placeholder="Enter order total"
                   name="order_total"
                   required
@@ -445,7 +463,43 @@ const handleSearch=(e)=>{
                   className=" flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
                 />
               </span>
+              
             </div>
+
+            {showStorageFields && (
+              <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between px-2 md:px-10">
+                <span className="flex flex-col gap-1">
+                  <label htmlFor="" className="text-white text-[13px] font-thin">
+                    Add Item
+                  </label>
+                  <input
+                    id="item"
+                    onChange={(e) => inputHandle(e)}
+                    value={state.item}
+                    type="text"
+                    placeholder="Enter item"
+                    name="item"
+                    required
+                    className="flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
+                  />
+                </span>
+                <span className="flex flex-col gap-1">
+                  <label htmlFor="" className="text-white text-[13px] font-thin">
+                    Add Weight
+                  </label>
+                  <input
+                    id="weight"
+                    onChange={(e) => inputHandle(e)}
+                    value={state.weight}
+                    type="text"
+                    placeholder="Enter weight"
+                    name="weight"
+                    required
+                    className="flex justify-between border border-slate-700 items-center py-[8px] px-[14px] w-[250px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6] font-thin"
+                  />
+                </span>
+              </div>
+            )}
 
             <div className="flex flex-col md:flex-row gap-0 md:gap-[7rem]  items-center md:px-10">
              

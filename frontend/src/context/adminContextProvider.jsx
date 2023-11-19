@@ -104,10 +104,10 @@ const addOrder=async (order)=>{
 
     console.log(result.data)
   } catch (error) {
+    console.log(error)
     if(error.response.status===409){
       toast.error("Order with same order id or tracking id already exist");
     }
-    console.log(error)
 
   }
 }

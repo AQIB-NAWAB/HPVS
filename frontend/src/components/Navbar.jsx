@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from 'react-icons/fa'; // Example icons from react-icons
 import "./components.css";
+import { FaTruck } from "react-icons/fa6";
 
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
@@ -38,7 +39,10 @@ const Navbar = () => {
         }`}
       >
         <Link to={"/"} className="logo" onClick={scrollToTop} >
-          HPVS
+        <FaTruck /> <span>
+
+        </span>
+         HPVS
         </Link>
         <div className={`links ${isMobile ? 'mobile' : ''}`}>
           <ul className={`flex ${isMobile ? 'flex-col' : 'flex-row'} gap-8`}>

@@ -64,19 +64,27 @@ Router.post("/addOrder", async (req, res) => {
       tracking_id: req.body.tracking_id,
     })
     if(isOrderExistWithOrderId || isOrderExistWithTrackingId){
-      res.status(409).json({message:"Order with same order id or tracking id already exist"})
+     return  res.status(409).json({message:"Order with same order id or tracking id already exist"})
     }
 
     const order = new Order(req.body);
     const result = await order.save();
     // get the hosted link of the site
     const host=req.get('host')
-
-    await sendEmail({
-      email: result.user_email,
-      subject:"Order Placed Successfully",
-      message:`Your order has been placed successfully. Please check your order details. Tracking Id for your order is ${result.tracking_id} . Visit our site to get further details ${host} . Thank you for shopping with us. Have a nice day.  `,
-    })
+// if the shipping_service is storage then send the item and weight in email
+    if(req.body.shipping_service==="storage"){
+      await sendEmail({
+        email: result.user_email,
+        subject:`HPSV  Order Placed`,
+        message:`Your order has been placed successfully for storage facility to store ${req.body.item} with the weight of ${req.body.weight} . Please check your order details. Tracking Id for your order is ${result.tracking_id} .Visit our site ${host}/track . Thank you for shopping with us. Have a nice day.  `,
+      });
+    }else{
+      await sendEmail({
+        email: result.user_email,
+        subject:`HPSV  Order Placed`,
+        message:`Your order has been placed successfully. Please check your order details. Tracking Id for your order is ${result.tracking_id} .Visit our site ${host}/track . Thank you for shopping with us. Have a nice day.  `,
+      });
+    }
     res.status(200).json({ order: result });
   } catch (error) {
     res.status(500).json({ error: error });
