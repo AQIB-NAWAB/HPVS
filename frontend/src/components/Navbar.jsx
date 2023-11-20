@@ -39,7 +39,8 @@ const Navbar = () => {
         }`}
       >
         <Link to={"/"} className="logo" onClick={scrollToTop} >
-        <img src="./images/final.png" alt="" />
+        
+        <img className="logo_image" src="./images/for1.png" alt="" />
         
         {/* <div className="right">
           <p>Holland Private Valuat & Shipping</p>
