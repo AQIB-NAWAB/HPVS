@@ -26,20 +26,50 @@ nav {
 
 
 nav .logo {
+width: 210px;
+height: 60px;
+border-left: 1px solid white;
+overflow: hidden;
+} */
+
+/* nav .logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* nav .logo{
+  display: flex;
+  align-items: center;
   font-family: 'Poppins', sans-serif;
-  font-weight: 800;
-  font-size: 24px;
-  /* display: flex;
   gap: 10px;
-  align-items: center; */
 }
-nav .logo img{
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
+nav .logo .left svg{
+  font-size: 50px;
+  
 }
+nav .logo .right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+nav .logo .right span{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+nav .logo .right span svg{
+  font-size: 30px;
+}
+nav .logo .right p{
+  font-size: 12px;
+  font-weight: 600;
+}
+nav .logo .right  h2{
+  font-size: 24px;
+  font-weight: 900;
 
-
+} */
 nav .links li a {
   font-size: 14px;
   font-family: 'Poppins', sans-serif;

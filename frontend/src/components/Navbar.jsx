@@ -39,10 +39,15 @@ const Navbar = () => {
         }`}
       >
         <Link to={"/"} className="logo" onClick={scrollToTop} >
-        <FaTruck /> <span>
+        <img src="./images/logo_main.png" alt="" />
+        
+        {/* <div className="right">
+          <p>Holland Private Valuat & Shipping</p>
+          <span>
 
-        </span>
-         HPVS
+          <h2>HPVS  </h2>          <FaTruck className="truck" />
+          </span>
+        </div> */}
         </Link>
         <div className={`links ${isMobile ? 'mobile' : ''}`}>
           <ul className={`flex ${isMobile ? 'flex-col' : 'flex-row'} gap-8`}>
