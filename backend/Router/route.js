@@ -5,7 +5,10 @@ const Order=require("../models/OrderModel");
 const sendEmail = require("../utilis/sendEmail");
 Router.use(express.json());
 Router.use(express.urlencoded({ extended: false }));
-
+// hellow route
+Router.get("/", (req, res) => {
+  res.send("Hello World");
+})
 // Admin Login
 Router.post("/loginAdmin", (req, res) => {
 const email = req.body.email;
