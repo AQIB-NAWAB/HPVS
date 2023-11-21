@@ -107,7 +107,7 @@ const Contact = () => {
             </div>
           </form>
         </div>
-        <div>
+        <div className="flex-1">
           <p className="text-[30px] font-semibold mb-10">ADDRESS & MAP</p>
           <iframe
             width="100%"
