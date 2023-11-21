@@ -33,6 +33,7 @@ const navigate=useNavigate();
   }
 
 }
+axios.defaults.withCredentials = true;
 
 // Get All pending orders 
 const getPendingOrders=async ()=>{
