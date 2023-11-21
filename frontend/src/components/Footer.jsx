@@ -27,10 +27,10 @@ const Footer = () => {
                 <ul className='flex flex-col gap-2 text-[15px] text-[#5b5959]'>
                     <li className='hover:text-[#2250fcff]'><Link onClick={scrollToTop} to="/location">Dubai</Link></li>
                     <li className='hover:text-[#2250fcff]'><Link onClick={scrollToTop} to="/location">Hongkong</Link></li>
-                    <li className='hover:text-[#2250fcff]'><Link onClick={scrollToTop} to="/location">Italy</Link></li>
+                    <li className='hover:text-[#2250fcff]'><Link onClick={scrollToTop} to="/location">Netherlands</Link></li>
                     <li className='hover:text-[#2250fcff]'><Link onClick={scrollToTop} to="/location">London</Link></li>
                     <li className='hover:text-[#2250fcff]'><Link onClick={scrollToTop} to="/location">Singapore</Link></li>
-                    <li className='hover:text-[#2250fcff]'><Link onClick={scrollToTop} to="/location">Turkey</Link></li>
+
                 </ul>
             </div>
             <div className='flex flex-col gap-4 pl-4'>
