@@ -52,6 +52,7 @@ const Footer = () => {
                     <li className='hover:text-[#2250fcff]'><Link to="/contact" onClick={scrollToTop}>Contact Us</Link></li>
                     <li className='hover:text-[#2250fcff]'><Link to="/about" onClick={scrollToTop}>About Us</Link></li>
                     <li className='hover:text-[#2250fcff]'><Link onClick={scrollToTop}>Terms of Service</Link></li>
+                    <li className='hover:text-[#2250fcff]'><Link to={"/login"} onClick={scrollToTop}>Admin Login</Link></li>
                 </ul>
             </div>
         </div>
