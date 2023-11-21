@@ -2,23 +2,16 @@
     "version": 2,
     "builds": [
       {
-        "src": "app.js", 
+        "src": "*.js", 
         "use": "@now/node"
-      },
-      {
-        "src": "frontend/dist/**",
-        "use": "@now/static"
       }
     ],
     "routes": [
-      {
-        "src": "/api/v1/(.*)",
-        "dest": "/app.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/frontend/dist/$1"
-      }
+        {
+            "src": "/.*",
+            "dest": "index.js"
+        }
+      
     ]
   }
   
