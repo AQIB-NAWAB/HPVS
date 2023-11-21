@@ -122,12 +122,12 @@ const Contact = () => {
           </iframe>
           <div className="flex gap-5 mt-10">
             <div className="flex flex-col gap-2">
-              <p className="text-[#3c4043] text-[15px] font-semibold">OURIERGE Shipping & Security Co., Inc.</p>
+              <p className="text-[#3c4043] text-[15px] font-semibold">Holland Private Valuat & Shipping , Inc.</p>
               <p className="text-[#5b5959] text-[14px]">10 Via Walter Gropius Ravenna, Emilia-Romagna 48124, Italy</p>
               <p className="text-[#5b5959] text-[14px]">P: +33 757-909-0582</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-[#3c4043] text-[15px] font-semibold">OURIERGE Shipping & Security Co. Office</p>
+              <p className="text-[#3c4043] text-[15px] font-semibold">Holland Private Valuat & Shipping  Office</p>
               <p className="text-[#5b5959] text-[14px]">Mecidiyeköy Şişli, İstanbul 34371, Turkey</p>
               <p className="text-[#5b5959] text-[14px]">P: +90 207-600-5000</p>
             </div>
