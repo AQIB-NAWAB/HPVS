@@ -7,7 +7,7 @@ const Location = () => {
       <div className="flex flex-col h-[50vh] w-[100%] gap-4 bg-[#f1f1f3ff] items-center justify-center">
         <p className="text-[60px]">Locations</p>
         <p className="text-[16px] text-[#5b5959]">
-          OURIERGE Physical Storage Locations
+        Holland Private Valuat & Shipping  Physical Storage Locations
         </p>
       </div>
       <div className="flex flex-col gap-2 justify-center items-center text-center mt-[6%] mb-[4%] pl-4 pr-4 md:pl-[80px] md:pr-[80px]">

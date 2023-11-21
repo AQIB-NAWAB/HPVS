@@ -14,12 +14,9 @@ app.use(cors(
 require("./DataBase/conn");
 const URLS = require("./Router/route");
 
-app.use("/api/v1",URLS);
+app.use("/api/v1/",URLS);
 
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
-});
+
 app.listen(port,()=>{
     console.log("server starts.............");
 })

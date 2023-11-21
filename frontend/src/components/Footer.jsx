@@ -12,7 +12,7 @@ const Footer = () => {
     <div className='flex flex-col font-pop'>
         <div className='flex flex-col gap-5 md:gap-0 md:flex-row justify-between pl-6 pr-6 pt-[50px] pb-12 bg-[#f9f9fa]'>
             <div className='flex flex-col gap-4 pl-4'>
-                <p className='text-[#3c4043ff] font-semibold text-[16px]'>OURIERGE SHIPPING & SECURITY CO.</p>
+                <p className='text-[#3c4043ff] font-semibold text-[16px]'>Holland Private Valuat & Shipping </p>
                 <p className='text-[14px] text-[#5b5959]'>Global leader in Safekeeping & security solutions</p>
             </div>
             <div className='flex flex-col gap-4 pl-4'>
