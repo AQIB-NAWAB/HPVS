@@ -18,7 +18,7 @@ const AdminContextProvider = (props) => {
 const navigate=useNavigate();
   const loginAdmin=async (email,password)=>{
   try {
-    const result=await axios.post(`${baseUrl}/loginAdmin`,{email:email,password:password})
+    const result=await axios.post(`${baseUrl}/loginAdmin`,{email:email,password:password}, { withCredentials: true })
     if(result.data.user){
       setAdmin(true)
       navigate("/dashboard")
@@ -37,7 +37,7 @@ const navigate=useNavigate();
 // Get All pending orders 
 const getPendingOrders=async ()=>{
   try {
-    const result=await axios.get(`${baseUrl}/pendingOrders`)
+    const result=await axios.get(`${baseUrl}/pendingOrders`, { withCredentials: true })
     setPendingOrders(result.data)
     console.log(result.data.pendingOrdersCount) 
   } catch (error) {
@@ -47,7 +47,7 @@ const getPendingOrders=async ()=>{
 // Get All processing orders
 const getProcessingOrders=async ()=>{
   try {
-    const result=await axios.get(`${baseUrl}/processingOrders`)
+    const result=await axios.get(`${baseUrl}/processingOrders`, { withCredentials: true })
     setProcessingOrders(result.data)
   } catch (error) {
     console.log(error)
@@ -58,7 +58,7 @@ const getProcessingOrders=async ()=>{
 // Get All deliverd orders
 const getDeliveredOrders=async ()=>{
   try {
-    const result=await axios.get(`${baseUrl}/deliveredOrders`)
+    const result=await axios.get(`${baseUrl}/deliveredOrders`, { withCredentials: true })
     setDeliveredOrders(result.data)
   } catch (error) {
     console.log(error)
@@ -67,7 +67,7 @@ const getDeliveredOrders=async ()=>{
 // Get All Orders
 const getAllOrders=async ()=>{
   try {
-    const result=await axios.get(`${baseUrl}/allOrders`)
+    const result=await axios.get(`${baseUrl}/allOrders`, { withCredentials: true })
     setAllOrders(result.data)
   } catch (error) {
     console.log(error)
@@ -76,7 +76,7 @@ const getAllOrders=async ()=>{
 // Get orders count according to month
 const getChartData=async ()=>{
   try {
-    const result=await axios.get(`${baseUrl}/orders/monthly-count-with-names`)
+    const result=await axios.get(`${baseUrl}/orders/monthly-count-with-names`, { withCredentials: true })
     setChartData(result.data)
     console.log(result.data)
   } catch (error) {
@@ -87,7 +87,7 @@ const getChartData=async ()=>{
 // update the status of order 
 const updateOrderStatus=async (id,order_status)=>{
   try {
-    const result=await axios.put(`${baseUrl}/updateOrderStatus/${id}`,{order_status:order_status})
+    const result=await axios.put(`${baseUrl}/updateOrderStatus/${id}`,{order_status:order_status}, { withCredentials: true })
     toast.success("Order Status Updated Successfully");
 
     console.log(result.data)
@@ -99,7 +99,7 @@ const updateOrderStatus=async (id,order_status)=>{
 // add order 
 const addOrder=async (order)=>{
   try {
-    const result=await axios.post(`${baseUrl}/addOrder`,order)
+    const result=await axios.post(`${baseUrl}/addOrder`,order, { withCredentials: true })
     toast.success("Order Added Successfully");
 
     console.log(result.data)
@@ -114,7 +114,7 @@ const addOrder=async (order)=>{
 // track the order 
 const trackOrderByTID=async (tracking_id)=>{
   try {
-    const result=await axios.get(`${baseUrl}/searchOrder/?tracking_id=${tracking_id}`)
+    const result=await axios.get(`${baseUrl}/searchOrder/?tracking_id=${tracking_id}`, { withCredentials: true })
     setTrackOrder(result.data)
     console.log(result.data)
   } catch (error) {
@@ -124,7 +124,7 @@ const trackOrderByTID=async (tracking_id)=>{
 // search orders by tracking_id or order_id or user_email passing passed from query
 const searchOrder=async (search)=>{
   try {
-    const result=await axios.get(`${baseUrl}/searchOrder?order_id=${search.order_id}&tracking_id=${search.tracking_id}&user_email=${search.user_email}`)
+    const result=await axios.get(`${baseUrl}/searchOrder?order_id=${search.order_id}&tracking_id=${search.tracking_id}&user_email=${search.user_email}`, { withCredentials: true })
     setAllSearchOrders(result.data)
     console.log(result.data)
   } catch (error) {
